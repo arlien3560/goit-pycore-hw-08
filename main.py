@@ -18,7 +18,8 @@ class Name(Field):
 
 class Phone(Field):
     def __init__(self, value):
-        if not (isinstance(value, str) and value.isdigit() and len(value) == 10):
+        if not (isinstance(value, str)
+                and value.isdigit() and len(value) == 10):
             raise ValueError(
                 "Phone number must be a 10-digit string of numbers."
             )
@@ -202,6 +203,7 @@ def birthdays(_, book: AddressBook):
         result += f"Congratulate {birthday_info['name']} on {congrats_date}\n"
     return result.strip()
 
+
 def save_data(book, filename="addressbook.pkl"):
     with open(filename, "wb") as f:
         pickle.dump(book, f)
@@ -239,7 +241,7 @@ def main():
         if command in ["close", "exit"]:
             print("Good bye!")
             save_data(book)
-            
+
             break
         elif command in command_map:
             print(command_map[command](args, book))
